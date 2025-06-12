@@ -16,7 +16,8 @@
   <div class="container">
     <h1>🎓 Congratulations, Stella</h1>
     <p class="subtitle">ur now officially a child with degree lol, soo proud of youu</p>
-    <button onclick="revealMessage()">🎁</button>
+    <button onclick="launchFireworks()">🎁</button>
+    <canvas id="fireworks"></canvas>
     <div id="message" class="hidden">💌 n send me the addy bby</div>
   </div>
 
@@ -25,6 +26,46 @@
       document.getElementById('message').classList.remove('hidden');
       document.getElementById('message').classList.add('visible');
     }
+    function launchFireworks() {
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particles = [];
+
+  function createParticle(x, y) {
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.random() * 5 + 2;
+    return {
+      x, y,
+      dx: Math.cos(angle) * speed,
+      dy: Math.sin(angle) * speed,
+      life: 60
+    };
+  }
+
+  for (let i = 0; i < 100; i++) {
+    particles.push(createParticle(canvas.width / 2, canvas.height / 2));
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      p.x += p.dx;
+      p.y += p.dy;
+      p.life--;
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+      if (p.life <= 0) particles.splice(i, 1);
+    });
+    if (particles.length > 0) requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
   </script>
 </body>
 </html>

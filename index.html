@@ -23,9 +23,11 @@
 
   <script>
   function revealMessage() {
-    const msg = document.getElementById('message');
-    msg.classList.remove('hidden');
-  }
+  const msg = document.getElementById('message');
+  msg.classList.remove('hidden');
+  msg.classList.add('show');
+}
+
 
   function launchFireworks() {
     const canvas = document.getElementById('fireworks');

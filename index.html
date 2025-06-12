@@ -1,4 +1,4 @@
-e
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,62 +8,22 @@ e
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="flower-container">
-    <img src="images/flower.svg" class="flower flower1" />
-    <img src="images/flower.svg" class="flower flower2" />
-    <img src="images/flower.svg" class="flower flower3" />
-  </div>
+  <div class="corner flower top-left"></div>
+  <div class="corner flower top-right"></div>
+  <div class="corner flower bottom-left"></div>
+  <div class="corner flower bottom-right"></div>
+
   <div class="container">
     <h1>🎓 Congratulations, Stella</h1>
-    <p>ur now officially a child with degree lol, soo proud of youu</p>
-    <button onclick="launchFireworks()">🎁</button>
-    <canvas id="fireworks"></canvas>
-    <div id="bby-msg" class="hidden">💌 n send me the addy bby</div>
+    <p class="subtitle">ur now officially a child with diploma lol, soo proud of youu</p>
+    <button onclick="revealMessage()">🎁 n send me the addy bby</button>
+    <div id="message" class="hidden">💌 n send me the addy bby</div>
   </div>
 
   <script>
-    function launchFireworks() {
-      const canvas = document.getElementById('fireworks');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      let particles = [];
-
-      function createParticle(x, y) {
-        const angle = Math.random() * 2 * Math.PI;
-        const speed = Math.random() * 5 + 2;
-        return {
-          x, y,
-          dx: Math.cos(angle) * speed,
-          dy: Math.sin(angle) * speed,
-          life: 60
-        };
-      }
-
-      for (let i = 0; i < 100; i++) {
-        particles.push(createParticle(canvas.width / 2, canvas.height / 2));
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach((p, i) => {
-          p.x += p.dx;
-          p.y += p.dy;
-          p.life--;
-          ctx.fillStyle = 'white';
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-          ctx.fill();
-          if (p.life <= 0) particles.splice(i, 1);
-        });
-        if (particles.length > 0) requestAnimationFrame(animate);
-      }
-
-      animate();
-
-      const msg = document.getElementById("bby-msg");
-      msg.classList.remove("hidden");
-      msg.classList.add("visible");
+    function revealMessage() {
+      document.getElementById('message').classList.remove('hidden');
+      document.getElementById('message').classList.add('visible');
     }
   </script>
 </body>

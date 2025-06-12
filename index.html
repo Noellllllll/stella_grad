@@ -22,50 +22,52 @@
   </div>
 
   <script>
-    function revealMessage() {
-      document.getElementById('message').classList.remove('hidden');
-      document.getElementById('message').classList.add('visible');
+  function revealMessage() {
+    const msg = document.getElementById('message');
+    msg.classList.remove('hidden');
+    msg.classList.add('visible');
+  }
+
+  function launchFireworks() {
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    function createParticle(x, y) {
+      const angle = Math.random() * 2 * Math.PI;
+      const speed = Math.random() * 5 + 2;
+      return {
+        x, y,
+        dx: Math.cos(angle) * speed,
+        dy: Math.sin(angle) * speed,
+        life: 60
+      };
     }
-    function launchFireworks() {
-  const canvas = document.getElementById('fireworks');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  let particles = [];
 
-  function createParticle(x, y) {
-    const angle = Math.random() * 2 * Math.PI;
-    const speed = Math.random() * 5 + 2;
-    return {
-      x, y,
-      dx: Math.cos(angle) * speed,
-      dy: Math.sin(angle) * speed,
-      life: 60
-    };
+    for (let i = 0; i < 100; i++) {
+      particles.push(createParticle(canvas.width / 2, canvas.height / 2));
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.life--;
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        if (p.life <= 0) particles.splice(i, 1);
+      });
+      if (particles.length > 0) requestAnimationFrame(animate);
+    }
+
+    animate();
   }
-
-  for (let i = 0; i < 100; i++) {
-    particles.push(createParticle(canvas.width / 2, canvas.height / 2));
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, i) => {
-      p.x += p.dx;
-      p.y += p.dy;
-      p.life--;
-      ctx.fillStyle = 'white';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-      ctx.fill();
-      if (p.life <= 0) particles.splice(i, 1);
-    });
-    if (particles.length > 0) requestAnimationFrame(animate);
-  }
-
-  animate();
-}
-
-  </script>
+</script>
 </body>
 </html>

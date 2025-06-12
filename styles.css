@@ -1,0 +1,94 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 24px;
+  margin-top: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+.flower-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.flower {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  animation: float 10s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.flower1 { left: 10%; animation-delay: 0s; }
+.flower2 { left: 50%; animation-delay: 2s; }
+.flower3 { left: 80%; animation-delay: 4s; }
+
+@keyframes float {
+  0% { top: 100%; transform: rotate(0deg); }
+  100% { top: -10%; transform: rotate(360deg); }
+}
+
+#fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+#bby-msg {
+  margin-top: 30px;
+  font-size: 20px;
+  background: white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px white;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+#bby-msg.visible {
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
